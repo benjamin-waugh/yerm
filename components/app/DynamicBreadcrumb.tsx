@@ -18,8 +18,8 @@ export default function DynamicBreadcrumb() {
           const formattedItem = item.replace("-", " ");
 
           return (
-            <React.Fragment key={`fragment-${i}`}>
-              <BreadcrumbItem key={`item-${i}`} className="capitalize">
+            <React.Fragment key={`fragment-${item}`}>
+              <BreadcrumbItem key={`item-${item}`} className="capitalize">
                 {i === breadcrumbs.length - 1 ? (
                   <BreadcrumbPage>{formattedItem}</BreadcrumbPage>
                 ) : (
@@ -28,7 +28,7 @@ export default function DynamicBreadcrumb() {
                   </BreadcrumbLink>
                 )}
               </BreadcrumbItem>
-              {i !== breadcrumbs.length - 1 && <BreadcrumbSeparator key={`separator-${i}`} />}
+              {i !== breadcrumbs.length - 1 && <BreadcrumbSeparator key={`separator-${item}`} />}
             </React.Fragment>
           );
         })}
