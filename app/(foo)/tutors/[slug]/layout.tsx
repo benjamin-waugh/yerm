@@ -1,23 +1,7 @@
-import TutorAvailabilityTabs from "@/components/app/TutorAvailabilityTabs";
-import TutorDetailsCard from "@/components/app/TutorDetailsCard";
-import TutorMetricsCard from "@/components/app/TutorMetricsCard";
-import TutorVideoCard from "@/components/app/TutorVideoCard";
+import { TutorDetailsCard, TutorMetricsCard, TutorAvailabilityTabs, TutorVideoCard } from "@/components/app/TutorComponents";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-
-const reviews = [
-  {
-    uuid: "",
-    student: {
-      uuid: "",
-      name: "Benjamin Waugh",
-    },
-    description: "Curabitur efficitur est in libero convallis eleifend. Quisque dapibus tristique orci, vitae eleifend massa dignissim viverra.",
-    rating: 5,
-    insertedAt: "2024-06-24T11:22:17.789Z",
-  },
-];
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 
 export default function TutorSlugLayout({ children, params }: { children: React.ReactNode; params: { slug: string } }) {
   return (
@@ -34,7 +18,7 @@ export default function TutorSlugLayout({ children, params }: { children: React.
                 <div className="flex">
                   <div className="flex-none mr-6">
                     <Avatar>
-                      <AvatarImage></AvatarImage>
+                      <AvatarImage />
                       <AvatarFallback>BW</AvatarFallback>
                     </Avatar>
                   </div>
