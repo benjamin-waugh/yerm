@@ -1,8 +1,13 @@
+"use client";
+
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BadgeCheck, UserCheck, UserPlus, EllipsisVertical, Star, TrendingUp } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
 
 const tutor = {
   uuid: "01903f3a-7da4-786f-bbb7-ca27090447f3",
@@ -33,16 +38,19 @@ const tutor = {
       uuid: "01903f3b-32ca-7c48-b29f-96d7cee97e5c",
       code: "ENG",
       name: "English",
+      slug: "english",
     },
     {
       uuid: "01903f3d-a857-7da8-a48b-8200aab1f01c",
       code: "UKR",
       name: "Ukrainian",
+      slug: "ukrainian",
     },
     {
       uuid: "01903f3d-d1d5-70e7-a224-213147c7b411",
       code: "RUS",
       name: "Russian",
+      slug: "russian",
     },
   ],
 };
@@ -61,31 +69,38 @@ const reviews = [
 ];
 
 export function TutorAvailabilityTabs() {
+  const pathname = usePathname();
+  const router = useRouter();
+  const currentPath = useMemo(() => pathname.split("/").pop() || "english", [pathname]);
+  const [currentTab, setCurrentTab] = useState(currentPath);
+
+  const handleTabChange = (newItem: string) => {
+    const newUrl = pathname.replace(currentPath, newItem);
+    setCurrentTab(newItem);
+    router.replace(newUrl, { scroll: false });
+  };
+
   return (
-    <Tabs defaultValue="ENG">
+    <Tabs value={currentTab} onValueChange={handleTabChange}>
       <div className="flex items-center justify-between">
         <h4 className="text-2xl font-semibold tracking-tight">Availability</h4>
         <TabsList>
-          {tutor.languages.map((item, i) => {
-            return (
-              <TabsTrigger key={`trigger-${i}`} value={item.code}>
-                {item.name}
-              </TabsTrigger>
-            );
-          })}
+          {tutor.languages.map((item, i) => (
+            <TabsTrigger key={`trigger-${item.slug}`} value={item.slug}>
+              {item.name}
+            </TabsTrigger>
+          ))}
         </TabsList>
       </div>
-      {tutor.languages.map((item, i) => {
-        return (
-          <TabsContent key={`content-${i}`} value={item.code}>
-            <Card>
-              <CardHeader></CardHeader>
-              <CardContent className="flex justify-center">[Placeholder]</CardContent>
-              <CardFooter></CardFooter>
-            </Card>
-          </TabsContent>
-        );
-      })}
+      {tutor.languages.map((item, i) => (
+        <TabsContent key={`content-${item.slug}`} value={item.slug}>
+          <Card>
+            <CardHeader></CardHeader>
+            <CardContent className="flex justify-center">[Placeholder]</CardContent>
+            <CardFooter></CardFooter>
+          </Card>
+        </TabsContent>
+      ))}
     </Tabs>
   );
 }
