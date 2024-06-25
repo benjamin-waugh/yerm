@@ -156,21 +156,21 @@ export function TutorDetailsCard() {
 export function TutorMetricsCard() {
   return (
     <Card>
-      <CardContent className="p-6">
-        <div className="flex flex-row justify-between">
-          <div className="flex flex-col flex-1 justify-center items-center space-y-1">
+      <CardContent className="pt-6">
+        <div className="grid grid-cols-2 gap-6 [&>*]:justify-center [&>*]:flex [&>*]:flex-col [&>*]:items-center [&>*]:space-y-1">
+          <div>
             <CardTitle>{tutor.students}</CardTitle>
             <CardDescription>Students</CardDescription>
           </div>
-          <div className="flex flex-col flex-1 justify-center items-center space-y-1">
+          <div>
             <CardTitle>{tutor.lessons}</CardTitle>
             <CardDescription>Lessons</CardDescription>
           </div>
-          <div className="flex flex-col flex-1 justify-center items-center space-y-1">
+          <div>
             <CardTitle>{(tutor.attendance * 100).toFixed(0)}%</CardTitle>
             <CardDescription>Attendance</CardDescription>
           </div>
-          <div className="flex flex-col flex-1 justify-center items-center space-y-1">
+          <div>
             <CardTitle>{(tutor.response * 100).toFixed(0)}%</CardTitle>
             <CardDescription>Response</CardDescription>
           </div>
